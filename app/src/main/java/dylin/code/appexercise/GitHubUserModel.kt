@@ -14,7 +14,7 @@ class GitHubUserModel(){
     var url : ObservableField<String> = ObservableField("")
     var site_admin : Boolean = false
 
-    fun getUsers(){
+    fun getUsers(): ArrayList<GitHubUserModel> {
         var users = ArrayList<GitHubUserModel>()
         val apiUrl = "https://api.github.com/users"
         val okHttpClient = OkHttpClient()
@@ -40,6 +40,8 @@ class GitHubUserModel(){
                 }
             }
         })
+
+        return users
     }
 
 }
