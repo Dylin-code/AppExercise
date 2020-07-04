@@ -12,10 +12,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         var binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         setContentView(binding.root)
+        binding.lifecycleOwner = this
+
         val model = GitHubUserModel()
         var dataModel = model.getUsers()
         var recyclerAdapter = UserCardAdapter(dataModel,this)
         binding.myAdapter = recyclerAdapter
 
     }
+
+
 }

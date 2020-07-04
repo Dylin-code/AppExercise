@@ -3,6 +3,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="myAdapter" type="dylin.code.appexercise.UserCardAdapter"/>
+
     </data>
     <LinearLayout
             android:layout_width="match_parent"
@@ -11,13 +12,12 @@
     >
 
         <android.support.v7.widget.RecyclerView
-              android:id="@+id/user_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:dividerHeight="1sp"
-              android:adapter="@{myAdapter}"
-              app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-        />
+                android:id="@+id/user_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adapter="@{myAdapter}"
+                android:dividerHeight="1sp"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
 
 
