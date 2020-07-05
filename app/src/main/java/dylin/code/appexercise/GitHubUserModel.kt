@@ -1,12 +1,11 @@
 package dylin.code.appexercise
 
-import android.R
-import android.content.Context
+
+
 import android.databinding.ObservableField
-import android.graphics.Bitmap
+
 import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
-import android.util.Log
+
 import okhttp3.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -39,7 +38,7 @@ class GitHubUserModel(){
             override fun onResponse(call: Call?, response: Response?) {
                 val responseStr = response!!.body()!!.string()
                 val itemList = JSONArray(responseStr)
-                for(i in 0..(itemList.length()-1)){
+                for(i in 0 until itemList.length()){
                     var user = JSONObject( itemList.get(i).toString())
                     var data = GitHubUserModel()
                     data.login = ObservableField( user.getString("login"))
