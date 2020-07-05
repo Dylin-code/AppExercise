@@ -9,13 +9,13 @@
     </style>
 
     <style name="Button_style">
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_height">60sp</item>
-        <item name="android:layout_width">match_parent</item>
+<!--        <item name="android:layout_weight">1</item>-->
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_margin">5sp</item>
         <item name="android:background">@drawable/button_shape</item>
         <item name="android:textColor">@android:color/background_light</item>
-        <item name="android:textSize">12sp</item>
+<!--        <item name="android:textSize">12sp</item>-->
         <item name="android:shadowColor">@color/shadowColor</item>
         <item name="android:shadowDx">5</item>
         <item name="android:shadowDy">5</item>

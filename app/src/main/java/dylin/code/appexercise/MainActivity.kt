@@ -15,10 +15,10 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
         val model = GitHubUserModel()
-        var dataModel = model.getUsers()
-        var recyclerAdapter = UserCardAdapter(dataModel,this)
+        var dataModels = model.getUsers()
+        var recyclerAdapter = UserCardAdapter(dataModels,this)
         binding.myAdapter = recyclerAdapter
-
+        binding.model = model
     }
 
 

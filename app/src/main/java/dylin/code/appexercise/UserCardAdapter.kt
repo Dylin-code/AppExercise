@@ -40,8 +40,6 @@ open class UserCardAdapter(
         var dataModel = items[position]
         holder.itemRowBinding.userViewModel = dataModel
 
-//        holder.bind(dataModel)
-
         setAnimation(holder.itemRowBinding.root, position)
 
 
@@ -86,4 +84,11 @@ open class UserCardAdapter(
         notifyItemMoved(fromPosition, toPosition)
     }
 
+
+    fun loadPage(url : String){
+        val model = GitHubUserModel()
+        var dataModels = model.getUsers(url)
+        items.removeAll(items);
+        items.addAll(dataModels)
+    }
 }

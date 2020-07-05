@@ -3,7 +3,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable name="myAdapter" type="dylin.code.appexercise.UserCardAdapter"/>
-
+        <variable
+                name="paging"
+                type="dylin.code.appexercise.PagingModel" />
+        <variable
+                name="model"
+                type="dylin.code.appexercise.GitHubUserModel" />
     </data>
     <LinearLayout
             android:layout_width="match_parent"
@@ -15,11 +20,34 @@
                 android:id="@+id/user_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="10"
                 android:adapter="@{myAdapter}"
                 android:dividerHeight="1sp"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" >
 
+        </android.support.v7.widget.RecyclerView>
 
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+<!--            <Button-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/Button_style"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:onClick="@{() -> myAdapter.loadPage(paging.prevPageUrl)}"-->
+<!--                    android:text="Prev" />-->
+
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Button_style"
+                    android:layout_weight="1"
+                    android:onClick="@{() -> myAdapter.loadPage(model.nextPageLink)}"
+                    android:text="Next" />
+        </LinearLayout>
 
     </LinearLayout>
 </layout>

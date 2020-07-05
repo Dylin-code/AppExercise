@@ -21,10 +21,12 @@ class GitHubUserModel(){
     var url : ObservableField<String> = ObservableField("")
     var site_admin : Boolean = false
     var avatarImage : Drawable? = null
+    var nextPageLink = ""
 
-    fun getUsers(): ArrayList<GitHubUserModel> {
+    fun getUsers(apiUrl: String = "https://api.github.com/users?since=0" ): ArrayList<GitHubUserModel> {
         var users = ArrayList<GitHubUserModel>()
-        val apiUrl = "https://api.github.com/users"
+//        val apiUrl = "https://api.github.com/users?since=0"
+
         val okHttpClient = OkHttpClient()
         val countDownLatch = CountDownLatch(1)
         val request  = Request.Builder().url(apiUrl).build()
@@ -37,6 +39,8 @@ class GitHubUserModel(){
 
             override fun onResponse(call: Call?, response: Response?) {
                 val responseStr = response!!.body()!!.string()
+                val linkHeader = response.header("Link")
+                nextPageLink = linkHeader!!.substring(linkHeader.indexOf("<")+1,linkHeader.indexOf(">"))
                 val itemList = JSONArray(responseStr)
                 for(i in 0 until itemList.length()){
                     var user = JSONObject( itemList.get(i).toString())
@@ -46,12 +50,18 @@ class GitHubUserModel(){
                     data.url = ObservableField( user.getString("url"))
                     data.site_admin =  user.getBoolean("site_admin")
                     data.avatarImage = loadImageFromURL(data.avatar_url)
+                    if(i==3)
+                        data.site_admin = true //icon test
                     users.add(data)
+
                 }
                 countDownLatch.countDown()
             }
         })
         countDownLatch.await()
+//        if(users.count() < 100){
+//            users.addAll(getUsers(nextPageLink))
+//        }
         return users
     }
 
