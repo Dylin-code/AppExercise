@@ -45,6 +45,10 @@ open class UserCardAdapter(
 
     }
 
+//    private fun setItemClick(view: View){
+//        view.setOnClickListener()
+//    }
+
     private fun setAnimation(view: View, position: Int) {
 
         if (position > lastPosition) {

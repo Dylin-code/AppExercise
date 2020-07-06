@@ -15,6 +15,7 @@
 
         <LinearLayout
                 android:orientation="horizontal"
+                android:onClick="@{(v)->userViewModel.getUserDetail(userViewModel,v)}"
                 android:layout_margin="2sp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
