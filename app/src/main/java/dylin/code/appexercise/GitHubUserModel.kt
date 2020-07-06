@@ -2,8 +2,11 @@ package dylin.code.appexercise
 
 
 
+import android.content.Context
 import android.content.Intent
 import android.databinding.ObservableField
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 
 import android.graphics.drawable.Drawable
 import android.view.View
@@ -17,7 +20,7 @@ import java.net.URL
 import java.util.concurrent.CountDownLatch
 
 
-class GitHubUserModel : java.io.Serializable {
+class GitHubUserModel {
     var login : String = ""
     var avatar_url : String = ""
     var url : String = ""
@@ -27,6 +30,7 @@ class GitHubUserModel : java.io.Serializable {
     var location : String = ""
     var blog : String = ""
     var nextPageLink = ""
+    var name = ""
 
     fun getUsers(apiUrl: String = "https://api.github.com/users?since=0" ): ArrayList<GitHubUserModel> {
         var users = ArrayList<GitHubUserModel>()
@@ -67,7 +71,7 @@ class GitHubUserModel : java.io.Serializable {
         return users
     }
 
-    private fun loadImageFromURL(url: String): Drawable {
+    fun loadImageFromURL(url: String): Drawable {
         val inputStream: InputStream = URL(url).content as InputStream
         return Drawable.createFromStream(inputStream, "src")
     }
@@ -88,12 +92,20 @@ class GitHubUserModel : java.io.Serializable {
                 currentUser.bio = user.getString("bio")
                 currentUser.location = user.getString("location")
                 currentUser.blog = user.getString("blog")
+                currentUser.name = user.getString("name")
                 countDownLatch.countDown()
             }
         })
         countDownLatch.await()
         val intent = Intent(view.context,UserDetailActivity::class.java)
-        intent.putExtra("model",currentUser)
+        intent.putExtra("name",currentUser.name)
+        intent.putExtra("avatar_url",currentUser.avatar_url)
+        intent.putExtra("bio",currentUser.bio)
+        intent.putExtra("location",currentUser.location)
+        intent.putExtra("blog",currentUser.blog)
+        intent.putExtra("site_admin",currentUser.site_admin)
+        intent.putExtra("login",currentUser.login)
+
         view.context.startActivity(intent)
     }
 }
