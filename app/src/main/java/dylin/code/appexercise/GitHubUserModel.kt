@@ -37,6 +37,7 @@ class GitHubUserModel(){
                 countDownLatch.countDown()
             }
 
+
             override fun onResponse(call: Call?, response: Response?) {
                 val responseStr = response!!.body()!!.string()
                 val linkHeader = response.header("Link")
@@ -50,8 +51,8 @@ class GitHubUserModel(){
                     data.url = ObservableField( user.getString("url"))
                     data.site_admin =  user.getBoolean("site_admin")
                     data.avatarImage = loadImageFromURL(data.avatar_url)
-                    if(i==3)
-                        data.site_admin = true //icon test
+//                    if(i==3)
+//                        data.site_admin = true //icon test
                     users.add(data)
 
                 }
